@@ -1,4 +1,4 @@
-# Wifi Selector
+# iotwifi-ui
 
 ### Static HTML UI For https://github.com/cjimti/iotwifi
 
