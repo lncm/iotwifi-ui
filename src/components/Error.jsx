@@ -4,12 +4,12 @@ import ReloadButton from './ReloadButton';
 
 export default ({ err }) => {
   return (
-    <div className="info red">
-      <b>Oops, something went wrong</b>
-      <br />
-      {err}
-      <br />
-      <br />
+    <div>
+      <div className="info red">
+      Oops, something went wrong
+        <br />
+        <b>{err}</b>
+      </div>
       <ReloadButton />
     </div>
   );

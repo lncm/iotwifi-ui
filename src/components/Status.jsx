@@ -2,9 +2,11 @@ import React from 'react';
 
 export default ({ status }) => {
   return (
-    <div>
-      Status:
-      <pre>{JSON.stringify(status, null, 2)}</pre>
+    <div className={`info ${status.ssid ? 'green' : 'red'}`}>
+      {status.ssid
+        ? <span>Currently connected to <i>{status.ssid}</i></span>
+        : <span>Not Connected to a WiFi Network</span>
+      }
     </div>
   );
 };

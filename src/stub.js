@@ -1,5 +1,5 @@
 export const connect = '{"status":"OK","message":"Connection","payload":{"ssid":"straylight-g","state":"COMPLETED","ip":"","message":""}}';
-export const status = '{"status":"OK","message":"status","payload":{"address":"b8:27:eb:fe:c8:ab","uuid":"a736659a-ae85-5e03-9754-dd808ea0d7f2","wpa_state":"INACTIVE"}}'
+export const status = '{"status":"OK","message":"status","payload":{"address":"MACADDRESS","bssid":"BSSSID","freq":"2462","group_cipher":"TKIP","id":"1","ip_address":"LOCALIP","key_mgmt":"WPA2-PSK","mode":"station","p2p_device_address":"MACADDRESS","pairwise_cipher":"CCMP","ssid":"SSIDNAME","uuid":"5bad64b6-7ad7-5b83-bec4-6521863d44f6","wpa_state":"COMPLETED"}}'
 export const scan = `{
     "status": "OK",
     "message": "Networks",

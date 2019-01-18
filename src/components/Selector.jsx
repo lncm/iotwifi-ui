@@ -19,8 +19,8 @@ export default class Selector extends Component {
   async fetch(type, params) {
     try {
       this.setState({ [type]: await api[type](params) });
-    } catch (err) {
-      this.setState({ err });
+    } catch ({ message }) {
+      this.setState({ err: message });
     }
   }
   render() {
@@ -37,10 +37,7 @@ export default class Selector extends Component {
     return (
       <div>
         <Status status={status} />
-        <Connect
-          scan={scan}
-          onSubmit={props => this.fetch('connect', props)}
-        />
+        {!scan ? <Spinner /> : <Connect scan={scan} onSubmit={props => this.fetch('connect', props)} />}
       </div>
     );
   }

@@ -1,24 +1,41 @@
+// TODO remove stub stuff
 import * as stubs from './stub';
 
-async function wait() {
-  return new Promise(r => setTimeout(r, Math.random() * 2000));
+const api = new URLSearchParams(window.location.search).get('api') || '';
+const stubMode = api === 'stub';
+
+async function request(type, params) {
+  if (stubMode) {
+    await new Promise(r => setTimeout(r, Math.random() * 2000));
+    return JSON.parse(stubs[type]).payload;
+  }
+  const options = !params ? {} : {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(params),
+  };
+  const response = await (await fetch(`${api}/${type}`, options)).json();
+  if (response.status !== 'OK') {
+    throw new Error(JSON.stringify(response));
+  }
+  return response.payload;
 }
 
+
 export async function status() {
-  // r.HandleFunc("/status", statusHandler)
-  await wait();
-  return JSON.parse(stubs.status).payload;
+  return request('status');
+}
+
+export async function connect({ ssid, psk }) {
+  return request('connect', { ssid, psk });
 }
 
 export async function scan() {
-  // r.HandleFunc("/scan", scanHandler)
-  await wait();
-  return JSON.parse(stubs.scan).payload;
-}
-
-export async function connect({ ssid, password }) {
-  // r.HandleFunc("/connect", connectHandler).Methods("POST")
-  console.log({ ssid, password });
-  await wait();
-  return JSON.parse(stubs.connect).payload;
+  const response = await request('scan');
+  return Object.values(response)
+    .map(n => ({ ...n, strength: 100 + parseInt(n.signal_level, 10) }))
+    .sort((a, b) => b.strength - a.strength);
 }

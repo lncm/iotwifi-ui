@@ -9,7 +9,7 @@ export default () => {
         window.location.reload();
       }}
     >
-      Try Again
+      Reload
     </button>
   );
 };

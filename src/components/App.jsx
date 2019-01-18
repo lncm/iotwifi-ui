@@ -7,7 +7,7 @@ export default () => {
     <div id="layout-container">
       <div id="main-header">
         <h1>
-          Select WiFi Network
+          WiFi Manager
         </h1>
       </div>
       <div className="content">
